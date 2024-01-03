@@ -90,16 +90,56 @@ var upperCasedCharacters = [
 
 // Function to prompt user for password options
 function getPasswordOptions() {
+ // Collect all of the user's paassword preferences through prompts
+  var passwordLength = parseInt(prompt("how many characters do you want in your password?"));
 
+  if (isNaN(passwordLength)) {
+    alert("your password length must be a number");
+    getPasswordOptions()
+  }
+
+  if (passwordLength < 8 || passwordLength > 128) {
+    alert("your password length must be between 8 and 128 characters")
+    getPasswordOptions()
+  }
+
+
+  var useNumbers = confirm ("would you like to use numbers in your password?")
+  var useSymbols = confirm ("would you like to use symbols in your password?")
+  var useUppercase = confirm ("would you like to use uppercase in your password?")
+  var useLowercase = confirm ("would you like to use lowercase in your password?")
+
+ // console.log('useNumbers: ', useNumbers, 'useSymbols: ', useSymbols, 'useUppercase: ', useUppercase, 'useLowercase: ', useLowercase) 
+  if (useNumbers===false && useSymbols===false && useUppercase===false && useLowercase===false) {
+    alert("you have to have at least one character type")
+    getPasswordOptions()
+  } 
+
+  var userOptions = {
+    passwordLength: passwordLength,
+    useNumbers: useNumbers,
+    useSymbols: useSymbols,
+    useUppercase: useUppercase,
+    useLowercase: useLowercase
+  }
+
+  return userOptions;
 }
+
+
 
 // Function for getting a random element from an array
 function getRandom(arr) {
-
+  //Math.random Math.floor
 }
 
 // Function to generate password with user input
 function generatePassword() {
+
+ var userOptions = getPasswordOptions()
+ console.log(userOptions.passwordLength);
+ 
+
 
 }
 
