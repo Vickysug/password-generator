@@ -89,6 +89,7 @@ var upperCasedCharacters = [
 ];
 
 // Function to prompt user for password options
+//This function prompts the user for various password options, including length, whether to include numbers, symbols, uppercase, and lowercase characters.
 function getPasswordOptions() {
   // Collect all of the user's paassword preferences through prompts
   var passwordLength = parseInt(prompt("Choose between 8 - 128 characters for your password."));
@@ -130,7 +131,9 @@ function getPasswordOptions() {
 }
 var fruit = ['kiwi', 'apple', 'banana']
 
-//Step  1  Function for getting a random element from an array
+// Function for getting a random element from an array
+//This function takes an array as input and returns a random element from that array.
+//It uses Math.random() to generate a random index within the length of the array and then retrieves the element at that index.
 function getRandom(arr) {
 
   var genRandIndex = Math.floor(Math.random() * arr.length);
@@ -145,6 +148,12 @@ function getRandom(arr) {
 
 
 // Function to generate password with user input
+/*This function calls getPasswordOptions to get the user's preferences.
+It initializes an empty array userCharacters to store the types of characters the user wants in the password.
+Based on the user's preferences, the corresponding character arrays are concatenated to userCharacters.
+The function then generates a password by randomly selecting characters from userCharacters and adding them to the passwordCharacters array.
+The final password is obtained by joining the characters in the passwordCharacters array.
+The generated password is returned by the function.*/
 function generatePassword() {
   var userOptions = getPasswordOptions()
 
@@ -179,9 +188,12 @@ function generatePassword() {
 
 
 // Get references to the #generate element
+/*The script gets a reference to an HTML element with the id generate and assigns it to the variable generateBtn.
+An event listener is added to generateBtn so that when it is clicked, the writePassword function is called.*/
 var generateBtn = document.querySelector('#generate');
 
 // Write password to the #password input
+/*This function calls generatePassword to get a password and then updates the value of an HTML element with the id password with the generated password.*/
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector('#password');
