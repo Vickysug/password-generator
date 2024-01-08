@@ -90,7 +90,7 @@ var upperCasedCharacters = [
 
 // Function to prompt user for password options
 function getPasswordOptions() {
- // Collect all of the user's paassword preferences through prompts
+  // Collect all of the user's paassword preferences through prompts
   var passwordLength = parseInt(prompt("Choose between 8 - 128 characters for your password."));
 
   if (isNaN(passwordLength)) {
@@ -104,16 +104,16 @@ function getPasswordOptions() {
   }
 
 
-  var useNumbers = confirm ("would you like to use numbers in your password?")
-  var useSymbols = confirm ("would you like to use symbols in your password?")
-  var useUppercase = confirm ("would you like to use uppercase in your password?")
-  var useLowercase = confirm ("would you like to use lowercase in your password?")
+  var useNumbers = confirm("would you like to use numbers in your password?")
+  var useSymbols = confirm("would you like to use symbols in your password?")
+  var useUppercase = confirm("would you like to use uppercase in your password?")
+  var useLowercase = confirm("would you like to use lowercase in your password?")
 
- // console.log('useNumbers: ', useNumbers, 'useSymbols: ', useSymbols, 'useUppercase: ', useUppercase, 'useLowercase: ', useLowercase) 
-  if (useNumbers===false && useSymbols===false && useUppercase===false && useLowercase===false) {
+  // console.log('useNumbers: ', useNumbers, 'useSymbols: ', useSymbols, 'useUppercase: ', useUppercase, 'useLowercase: ', useLowercase) 
+  if (useNumbers === false && useSymbols === false && useUppercase === false && useLowercase === false) {
     alert("you have to have at least one character type")
-   
-  } 
+
+  }
 
   var userOptions = {
     passwordLength: passwordLength,
@@ -121,21 +121,24 @@ function getPasswordOptions() {
     useSymbols: useSymbols,
     useUppercase: useUppercase,
     useLowercase: useLowercase
-  
+
   }
   console.log(userOptions)
-  
+
   return userOptions;
 
-   }
-
+}
+var fruit = ['kiwi', 'apple', 'banana']
 
 //Step  1  Function for getting a random element from an array
 function getRandom(arr) {
-    
-  genRand = arr[Math.floor(Math.random()*arr.length)];
+
+  var genRandIndex = Math.floor(Math.random() * arr.length);
+  //console.log('Index:', genRandIndex)
+  var genRand = arr[genRandIndex];
+  //console.log('Random:', genRand)
   return genRand;
-     
+
 }
 
 
@@ -143,20 +146,48 @@ function getRandom(arr) {
 
 // Function to generate password with user input
 function generatePassword() {
-}
- 
-var userOptions = getPasswordOptions()
+  var userOptions = getPasswordOptions()
 
- // Get references to the #generate element
- var generateBtn = document.querySelector('#generate');
- 
- // Write password to the #password input
- function writePassword() {
-   var password = generatePassword();
-   var passwordText = document.querySelector('#password');
- 
-   passwordText.value = password;
- }
- 
- // Add event listener to generate button
- generateBtn.addEventListener('click', writePassword);
+  var userCharacters = []
+  if(userOptions.useNumbers===true) {
+    userCharacters=userCharacters.concat(numericCharacters)
+  }
+
+  if(userOptions.useSymbols===true){
+    userCharacters=userCharacters.concat(specialCharacters)
+  }
+   if(userOptions.useUppercase===true){
+    userCharacters=userCharacters.concat(upperCasedCharacters)
+   }
+   if(userOptions.useLowercase===true){
+    userCharacters=userCharacters.concat(lowerCasedCharacters)
+   }
+
+
+  var passwordCharacters=[]
+  for(var i=0;i < userOptions.passwordLength;i++ ){
+    var character=getRandom(userCharacters)
+    console.log('new character to add: ', character)
+    passwordCharacters.push(character)
+  }
+  console.log('PAssword Characters: ', passwordCharacters)
+  var password=passwordCharacters.join("")
+  return password
+  
+}
+
+
+
+// Get references to the #generate element
+var generateBtn = document.querySelector('#generate');
+
+// Write password to the #password input
+function writePassword() {
+  var password = generatePassword();
+  var passwordText = document.querySelector('#password');
+
+  passwordText.value = password;
+}
+
+// Add event listener to generate button
+generateBtn.addEventListener('click', writePassword);
